@@ -29,6 +29,9 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0.1"
 
+gem "devise"
+gem "devise-bootstrap-views", "~> 1.0"
+gem "haml-rails", "~> 2.0"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -58,8 +61,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem "letter_opener"
 end
 
 group :test do
