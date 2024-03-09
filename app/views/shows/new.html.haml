@@ -1,0 +1,10 @@
+%h1= t('Create a new show')
+= form_for(@show) do |f|
+  .form-group
+    = f.label :movie_id, 'Movie'
+    = f.select :movie_id, @movies, { include_blank: false }, class: 'form-control'
+  .form-group
+    = f.label :time
+    = f.text_field :time, class: 'form-control'
+  .form-group
+    = f.submit 'Create', class: 'btn btn-primary'

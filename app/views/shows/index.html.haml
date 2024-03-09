@@ -1,0 +1,6 @@
+%a.btn.btn-primary{href: new_show_path} Add Show
+- @shows.each do |show|
+  .card.margin-10 
+    .card.body 
+      %strong= show.movie.name
+      %p= show.time

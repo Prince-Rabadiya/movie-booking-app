@@ -1,1 +1,7 @@
-%p movies
+- if current_user.admin?
+  %a.btn.btn-primary{href: new_movie_path} New Movie
+- @movies.each do |movie|
+  .card.margin-10
+    .card-body{onclick: "window.location='/movies/#{movie.id}'", style: "cursor: pointer;"}
+      %strong= movie.name
+      %p= movie.genres.pluck(:title).join(', ')
