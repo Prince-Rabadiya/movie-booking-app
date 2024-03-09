@@ -1,0 +1,10 @@
+%h1= t('Create a new seat')
+= form_for(@seat) do |f|
+  .form-group
+    = f.label :row
+    = f.text_field :row, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :column
+    = f.number_field :column, class: 'form-control'
+  .form-group
+    = f.submit 'Create', class: 'btn btn-primary'

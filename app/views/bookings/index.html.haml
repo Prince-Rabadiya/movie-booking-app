@@ -1,0 +1,14 @@
+- if current_user.admin?
+  %strong Bookings
+- else
+  %strong Your Bookings
+- @bookings.each do |booking|
+  .card.margin-10{onclick: "window.location='/bookings/#{booking.id}'", style: "cursor: pointer;"}
+    .card-body
+      %strong Movie
+      %p= booking.show.movie.name
+      %strong Time
+      %p= booking.show.time
+      %strong Seats
+      %p= booking.seats.map { |seat| "#{seat.row} - #{seat.column}" }.join(", ")
+ 

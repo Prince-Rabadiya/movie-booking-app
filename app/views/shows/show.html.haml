@@ -1,0 +1,11 @@
+%strong= "#{@movie.name}  #{@show.time}"
+= form_for @booking, path: new_booking_path do |f|
+  = f.hidden_field :show_id, value: @show.id
+  = f.hidden_field :user_id, value: current_user.id
+  = f.hidden_field :fare, value: @show.fare
+  = f.collection_check_boxes :seat_ids, @seats, :id, :row do |b|
+    %div
+      = b.check_box
+      = b.label  { "#{Seat.find(b.value).row} - #{Seat.find(b.value).column}" }
+  = f.submit "Book Now", class: "btn btn-primary"
+      

@@ -1,0 +1,6 @@
+%a.btn.btn-primary{href: new_seat_path} Add Seat
+
+- @seats.each do |seat|
+  .card.margin-10 
+    .card.body 
+      %p="#{seat.row} - #{seat.column}"
