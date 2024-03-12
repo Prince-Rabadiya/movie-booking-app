@@ -87,5 +87,6 @@ build-iPhoneSimulator/
 
 /public/assets
 
+config/master.key
 # Ignore master key for decrypting credentials and more.
 # /config/master.key Allowing masterkey so that project can be used by other devs

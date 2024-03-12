@@ -26,9 +26,8 @@
           %li.nav-item
             %a.nav-link{href: bookings_path} Bookings
         - if current_user
-          %form.form-inline.my-2.my-lg-0
-            %li.nav-item
-              = link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger cancel-link"
+          .mr-sm-2
+            = link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger cancel-link"
           
 
     .padding-left-30.padding-right-30

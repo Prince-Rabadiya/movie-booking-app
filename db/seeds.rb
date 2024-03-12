@@ -2,7 +2,7 @@
   Genre.find_or_create_by!(title: genre_name)
 end
 
-('a'..'h').each do |row|
+('A'..'Z').each do |row|
   (1..10).each do |column|
     Seat.find_or_create_by!(row: row, column: column)
   end

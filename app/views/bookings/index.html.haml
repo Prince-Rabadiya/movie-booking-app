@@ -8,7 +8,7 @@
       %strong Movie
       %p= booking.show.movie.name
       %strong Time
-      %p= booking.show.time
+      %p= standard_date_time(booking.show.time)
       %strong Seats
       %p= booking.seats.map { |seat| "#{seat.row} - #{seat.column}" }.join(", ")
  

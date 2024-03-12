@@ -3,6 +3,6 @@
   .card.margin-10
     .card-body{onclick: "window.location='/shows/#{show.id}'", style: "cursor: pointer;"}
       %strong time
-      %p= show.time
+      %p= standard_date_time(show.time)
       %strong fare
       %p= show.fare

@@ -4,7 +4,7 @@
     %strong Movie
     %p= @movie.name
     %strong Time
-    %p= @show.time
+    %p= standard_date_time(@show.time)
     %strong Seats
     %p= @seats.map { |seat| "#{seat.row} - #{seat.column}" }.join(", ")
 = link_to 'Cancel Booking', booking_path(@booking.id), data: { turbo_method: :delete }, class: "btn btn-danger cancel-link"
