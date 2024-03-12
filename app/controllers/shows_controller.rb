@@ -7,7 +7,8 @@ class ShowsController < ApplicationController
     @booking = Booking.new
     @show = Show.find(params[:id])
     @movie = @show.movie
-    @seats = Seat.where.not(id: @show.bookings.includes(:seats).map(&:seats).flatten.pluck(:id))
+    @seats = Seat.all
+    @booked_seat_ids = @show.bookings.includes(:seats).map(&:seats).flatten.pluck(:id)
   end
 
   def new
