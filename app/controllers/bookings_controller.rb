@@ -15,8 +15,9 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
-    if @booking.save!
+    total_fare = Seat.where(id: booking_params[:seat_ids]).pluck(:fare).sum
+    @booking = Booking.new(booking_params.merge({ total_fare: total_fare }))
+    if @booking.save
       redirect_to @booking, notice: 'Booking was successfully created.'
     else
       flash[:alert] = @booking.errors.full_messages.join(", ")

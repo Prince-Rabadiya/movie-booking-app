@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_09_162934) do
   create_table "bookings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "show_id", null: false
+    t.integer "total_fare", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["show_id"], name: "index_bookings_on_show_id"
@@ -49,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_09_162934) do
   create_table "seats", force: :cascade do |t|
     t.string "row"
     t.integer "column"
+    t.integer "fare"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,7 +58,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_09_162934) do
   create_table "shows", force: :cascade do |t|
     t.bigint "movie_id", null: false
     t.datetime "time"
-    t.integer "fare"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_shows_on_movie_id"

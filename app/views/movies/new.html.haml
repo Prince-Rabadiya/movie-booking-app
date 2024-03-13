@@ -1,10 +1,13 @@
 %h1= t('Create a new movie')
 = form_for(@movie) do |f|
   .form-group
-    = f.label :name
+    .font-weight-bold= f.label :name
     = f.text_field :name, autofocus: true, class: 'form-control'
   .form-group
-    = f.label :genre_ids, "Genres"
-    = f.collection_check_boxes :genre_ids, @genres, :id, :title, class: 'form-control'
+    .font-weight-bold= f.label :genre_ids, "Genres"
+    = f.collection_check_boxes :genre_ids, @genres, :id, :title, class: 'form-control' do |b|
+      %div
+        = b.check_box
+        = b.label
   .form-group
     = f.submit 'Create', class: 'btn btn-primary'

@@ -4,7 +4,7 @@ end
 
 ('A'..'Z').each do |row|
   (1..10).each do |column|
-    Seat.find_or_create_by!(row: row, column: column)
+    Seat.find_or_create_by!(row: row, column: column, fare: column + 10)
   end
 end
 
@@ -13,7 +13,7 @@ Genre.all.each do |genre|
 end
 
 Movie.all.each_with_index do |movie, index|
-  Show.find_or_create_by!(movie: movie, time: Time.now + 1.day + index.hours, fare: 100)
+  Show.find_or_create_by!(movie: movie, time: Time.now + 1.day + index.hours)
 end
 
 User.find_or_create_by!(email: "admin@gmail.com") do |user|
