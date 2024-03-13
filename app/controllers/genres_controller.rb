@@ -9,11 +9,11 @@ class GenresController < ApplicationController
 
   def create
     @genre = Genre.new(genre_params)
-    if @genre.save!
+    if @genre.save
       redirect_to genres_path, notice: 'Genre was successfully created.'
     else
       flash[:alert] = @genre.errors.full_messages.join(", ")
-      render :new
+      redirect_to new_genre_path
     end
   end
 
