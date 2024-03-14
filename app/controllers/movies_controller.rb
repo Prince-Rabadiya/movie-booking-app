@@ -3,20 +3,24 @@
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all.includes(:genres)
+    authorize! :index, Movie
   end
 
   def show
     @movie = Movie.find(params[:id])
     @shows = @movie.shows
+    authorize! :read, @movie
   end
 
   def new
     @movie = Movie.new
     @genres = Genre.all
+    authorize! :create, @movie
   end
 
   def create
     @movie = Movie.new(movie_params)
+    authorize! :create, @movie
     if @movie.save
       redirect_to movies_path, notice: 'Movie was successfully created.'
     else
