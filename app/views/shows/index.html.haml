@@ -3,4 +3,4 @@
   .card.margin-10 
     .card.body 
       %strong= show.movie.name
-      %p= standard_date_time(show.time)
+      %p= "#{standard_date_time(show.start_time)} - #{standard_date_time(show.end_time)}"

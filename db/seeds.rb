@@ -13,7 +13,9 @@ Genre.all.each do |genre|
 end
 
 Movie.all.each_with_index do |movie, index|
-  Show.find_or_create_by!(movie: movie, time: Time.now + 1.day + index.hours)
+  start_time = Show.all.order(:end_time)&.last&.end_time&.send('+', 15.minutes) || (Time.now + 1.day + index.hours).beginning_of_hour
+  end_time = start_time + 3.hours
+  Show.find_or_create_by!(movie: movie, start_time: start_time, end_time: end_time)
 end
 
 User.find_or_create_by!(email: "admin@gmail.com") do |user|
@@ -22,4 +24,11 @@ User.find_or_create_by!(email: "admin@gmail.com") do |user|
   user.password = "password"
   user.password_confirmation = "password"
   user.role = "admin"
+end
+
+User.find_or_create_by!(email: "user@gmail.com") do |user|
+  user.first_name = "FN"
+  user.last_name = "LN"
+  user.password = "password"
+  user.password_confirmation = "password"
 end

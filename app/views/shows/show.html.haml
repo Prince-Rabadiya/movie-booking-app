@@ -1,10 +1,10 @@
 %pe Select seats for show
 %strong= @movie.name
 %pe at
-%strong= standard_date_time(@show.time)
+%strong= standard_date_time(@show.start_time)
 %br
 %br
-= form_for @booking, path: new_booking_path do |f|
+= form_for @booking, path: new_booking_path, data: { controller: "live-fare" } do |f|
   = f.hidden_field :show_id, value: @show.id
   = f.hidden_field :user_id, value: current_user.id
   = f.collection_check_boxes :seat_ids, @seats, :id, :row do |b|
@@ -16,7 +16,7 @@
       %strong.padding-right-30= b.object.row
 
     %pe.padding-right-10
-      = b.check_box(disabled: @booked_seat_ids.include?(b.object.id), class: 'seat-checkbox', data: { id: b.object.id, fare: b.object.fare })
+      = b.check_box(disabled: @booked_seat_ids.include?(b.object.id), data: { "live-fare-value": b.object.fare, action: "change->live-fare#change" })
       = b.label  { "#{b.object.column}" }
     - @current_row = b.object.row
 
@@ -25,18 +25,3 @@
   #total-fare.font-weight-bold.text-success= "Total Fare: 0"
   %br
   = f.submit "Book Now", class: "btn btn-primary"
-      
-:javascript
-  window.onload = function() {
-    $(document).ready(function() {
-      $('.seat-checkbox').change(function() {
-        var totalFare = parseInt($('#total-fare').text().split(' ')[2])
-        var seatFare = parseInt($(this).data('fare'))
-        if ($(this).is(':checked')) {
-          $('#total-fare').text(`Total Fare: ${totalFare + seatFare}`)
-        } else {
-          $('#total-fare').text(`Total Fare: ${totalFare - seatFare}`)
-        }
-      });
-    });
-  }
