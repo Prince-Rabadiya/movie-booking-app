@@ -3,14 +3,17 @@
 class SeatsController < ApplicationController
   def index
     @seats = Seat.all
+    authorize! :index, @seats
   end
 
   def new
     @seat = Seat.new
+    authorize! :read, @seat
   end
 
   def create
     @seat = Seat.new(seat_params)
+    authorize! :create, @seat
     if @seat.save
       redirect_to seats_path, notice: 'Seat was successfully created.'
     else

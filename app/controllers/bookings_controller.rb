@@ -7,6 +7,7 @@ class BookingsController < ApplicationController
                 else
                   Booking.where(user_id: current_user.id).includes(:seats, show: [:movie])
                 end
+    authorize! :index, Booking
   end
 
   def show
@@ -15,11 +16,13 @@ class BookingsController < ApplicationController
     @show = @booking.show
     @movie = @show.movie
     @user = @booking.user if current_user.admin?
+    authorize! :read, @booking
   end
 
   def create
     total_fare = Seat.where(id: booking_params[:seat_ids]).pluck(:fare).sum
     @booking = Booking.new(booking_params.merge({ total_fare: }))
+    authorize! :create, @booking
     if @booking.save
       redirect_to @booking, notice: 'Booking was successfully created.'
     else
@@ -30,6 +33,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking = Booking.find(params[:id])
+    authorize! :destroy, @booking
     @booking.destroy
     redirect_to bookings_path, notice: 'Booking was successfully destroyed.'
   end

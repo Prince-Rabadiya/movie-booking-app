@@ -35,6 +35,7 @@ gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'haml-rails', '~> 2.0'
 gem 'jquery-rails'
+gem 'cancancan'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
