@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SeatsController < ApplicationController
   def index
     @seats = Seat.all
@@ -12,7 +14,7 @@ class SeatsController < ApplicationController
     if @seat.save
       redirect_to seats_path, notice: 'Seat was successfully created.'
     else
-      flash[:alert] = @seat.errors.full_messages.join(", ")
+      flash[:alert] = @seat.errors.full_messages.join(', ')
       redirect_to new_seat_path
     end
   end
