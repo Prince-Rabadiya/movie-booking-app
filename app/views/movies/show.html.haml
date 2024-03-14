@@ -2,5 +2,7 @@
 - @shows.each do |show|
   .card.margin-10
     .card-body{onclick: "window.location='/shows/#{show.id}'", style: "cursor: pointer;"}
-      %strong time
-      %p= standard_date_time(show.time)
+      %strong Start Time
+      %p= standard_date_time(show.start_time)
+      %strong End Time
+      %p= standard_date_time(show.end_time)

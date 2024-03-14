@@ -1,6 +1,6 @@
 class ShowsController < ApplicationController
   def index
-    @shows = Show.all.includes(:movie)
+    @shows = Show.all.includes(:movie).order(:start_time)
   end
 
   def show
@@ -29,6 +29,6 @@ class ShowsController < ApplicationController
   private
 
   def show_params
-    params.require(:show).permit(:time, :movie_id)
+    params.require(:show).permit(:start_time, :end_time, :movie_id)
   end
 end

@@ -57,7 +57,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_09_162934) do
 
   create_table "shows", force: :cascade do |t|
     t.bigint "movie_id", null: false
-    t.datetime "time"
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_shows_on_movie_id"

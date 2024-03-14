@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   def index
     if current_user.admin?
-      @bookings = Booking.includes(:seats, show: [:movie])
+      @bookings = Booking.includes(:seats, :user, show: [:movie])
     else
       @bookings = Booking.where(user_id: current_user.id).includes(:seats, show: [:movie])
     end
@@ -12,6 +12,7 @@ class BookingsController < ApplicationController
     @seats = @booking.seats
     @show = @booking.show
     @movie = @show.movie
+    @user = @booking.user if current_user.admin?
   end
 
   def create

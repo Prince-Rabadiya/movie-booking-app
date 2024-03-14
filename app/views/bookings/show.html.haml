@@ -1,10 +1,15 @@
 %strong Confirmed booking!!!
 .card.margin-10
   .card-body 
+    - if current_user.admin?
+      %strong User Name
+      %p= @user.first_name + ' ' + @user.last_name
     %strong Movie
     %p= @movie.name
-    %strong Time
-    %p= standard_date_time(@show.time)
+    %strong Start Time
+    %p= standard_date_time(@show.start_time)
+    %strong End Time
+    %p= standard_date_time(@show.end_time)
     %strong Seats
     %p= @seats.map { |seat| "#{seat.row} - #{seat.column}" }.join(", ")
     %strong Total Fare
