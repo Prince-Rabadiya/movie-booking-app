@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class BookingsController < ApplicationController
   def index
-    if current_user.admin?
-      @bookings = Booking.includes(:seats, :user, show: [:movie])
-    else
-      @bookings = Booking.where(user_id: current_user.id).includes(:seats, show: [:movie])
-    end
+    @bookings = if current_user.admin?
+                  Booking.includes(:seats, :user, show: [:movie])
+                else
+                  Booking.where(user_id: current_user.id).includes(:seats, show: [:movie])
+                end
   end
 
   def show
@@ -17,11 +19,11 @@ class BookingsController < ApplicationController
 
   def create
     total_fare = Seat.where(id: booking_params[:seat_ids]).pluck(:fare).sum
-    @booking = Booking.new(booking_params.merge({ total_fare: total_fare }))
+    @booking = Booking.new(booking_params.merge({ total_fare: }))
     if @booking.save
       redirect_to @booking, notice: 'Booking was successfully created.'
     else
-      flash[:alert] = @booking.errors.full_messages.join(", ")
+      flash[:alert] = @booking.errors.full_messages.join(', ')
       redirect_to show_path(@booking.show_id)
     end
   end
@@ -31,7 +33,7 @@ class BookingsController < ApplicationController
     @booking.destroy
     redirect_to bookings_path, notice: 'Booking was successfully destroyed.'
   end
-  
+
   private
 
   def booking_params

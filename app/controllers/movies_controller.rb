@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all.includes(:genres)
@@ -8,7 +10,7 @@ class MoviesController < ApplicationController
     @shows = @movie.shows
   end
 
-  def new 
+  def new
     @movie = Movie.new
     @genres = Genre.all
   end
@@ -19,7 +21,7 @@ class MoviesController < ApplicationController
       redirect_to movies_path, notice: 'Movie was successfully created.'
     else
       @genres = Genre.all
-      flash[:alert] = @movie.errors.full_messages.join(", ")
+      flash[:alert] = @movie.errors.full_messages.join(', ')
       redirect_to new_movie_path
     end
   end

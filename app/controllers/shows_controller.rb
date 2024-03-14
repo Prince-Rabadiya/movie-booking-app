@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShowsController < ApplicationController
   def index
     @shows = Show.all.includes(:movie).order(:start_time)
@@ -21,7 +23,7 @@ class ShowsController < ApplicationController
     if @show.save
       redirect_to shows_path, notice: 'Show was successfully created.'
     else
-      flash[:alert] = @show.errors.full_messages.join(", ")
+      flash[:alert] = @show.errors.full_messages.join(', ')
       redirect_to new_show_path
     end
   end
